@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="half">
+            <rect x="0" y="0" width="10" height="20"/>
+        </clipPath>
+    </defs>
+    <path
+            d="M10 0l2.472 6.307h6.627l-5.365 4.29 2.04 6.276L10 13.13l-5.774 3.743 2.04-6.276L.9 6.307h6.627z"
+            fill="#FFD700"
+            clip-path="url(#half)"
+    />
+    <path
+            d="M10 0l2.472 6.307h6.627l-5.365 4.29 2.04 6.276L10 13.13l-5.774 3.743 2.04-6.276L.9 6.307h6.627z"
+            fill="none"
+            stroke="#FFD700"
+            stroke-width="1"
+    />
+</svg>
