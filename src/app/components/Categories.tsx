@@ -31,7 +31,7 @@ const Categories = ({ categoryList }: { categoryList: string[] }) => {
   };
 
   return (
-    <div className="flex flex-col sticky top-16 h-fit self-start">
+    <div className="flex flex-col sticky md:block md:bg-transparent bg-black  top-0 p-4 h-fit self-start w-full md:w-auto">
       <div className="relative w-full">
         <input
           type="text"
@@ -51,16 +51,19 @@ const Categories = ({ categoryList }: { categoryList: string[] }) => {
           <Image src="/images/search.svg" alt="Search" width={20} height={20} />
         </button>
       </div>
-
-      <div className="flex flex-col items-start justify-start gap-2 mt-4">
-        <span className="text-text-primary dark:text-dark-text-primary font-bold border-b-2 border-black dark:border-white  pb-2 mb-4">
+      <div className="mt-4 flex overflow-x-auto whitespace-nowrap gap-4 md:flex-col md:whitespace-normal md:overflow-x-visible">
+        <span className="hidden md:block text-text-primary dark:text-dark-text-primary font-bold border-b-2 border-black dark:border-white pb-2 mb-4">
           Category Lists
         </span>
         {categoryList.map((category) => (
           <button
             onClick={() => selectCategoryHandler(category)}
             key={category}
-            className={`cursor-pointer text-text-primary dark:text-dark-text-primary text-sm ${category === selectedCategory ? 'border-b-2 border-black dark:border-white' : ''}`}
+            className={`shrink-0 cursor-pointer text-text-primary dark:text-dark-text-primary text-sm text-left ${
+              category === selectedCategory
+                ? 'border-b-2 border-black dark:border-white'
+                : ''
+            }`}
           >
             {formatCategoryName(category)}
           </button>

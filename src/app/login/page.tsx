@@ -32,7 +32,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-start flex-col bg-bg-primary dark:bg-dark-bg-primary w-full min-h-screen">
       <form
         onSubmit={handleLogin}
-        className="bg-white dark:bg-dark-bg-secondary mt-24 px-4 py-8 flex flex-col justify-center gap-4 rounded-md shadow-md shadow-gray-300 dark:shadow-black/50 w-[35%] min-w-[100px] border-gray-200 border-2 dark:border-none"
+        className="bg-white dark:bg-dark-bg-secondary mt-24 px-4 py-8 flex flex-col justify-center gap-4 rounded-md shadow-md shadow-gray-300 dark:shadow-black/50 w-[80%] md:w-[35%] min-w-[100px] border-gray-200 border-2 dark:border-none"
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="username" className="dark:text-dark-text-primary">

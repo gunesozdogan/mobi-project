@@ -11,9 +11,16 @@ export default function ThemeListener() {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (localStorage.theme === 'dark') {
-      dispatch(setDark());
-    } else {
+    try {
+      const themeStr = localStorage.getItem('theme');
+      const theme = themeStr ? JSON.parse(themeStr) : null;
+
+      if (theme && theme.isDark) {
+        dispatch(setDark());
+      } else {
+        dispatch(setLight());
+      }
+    } catch (e) {
       dispatch(setLight());
     }
     setHydrated(true);
@@ -21,7 +28,7 @@ export default function ThemeListener() {
 
   useEffect(() => {
     if (!hydrated) return;
-    
+
     const root = window.document.documentElement;
     if (isDark) {
       root.classList.add('dark');

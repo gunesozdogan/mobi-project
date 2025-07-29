@@ -36,8 +36,8 @@ const ProductItem = ({ product }: { product: Product }) => {
         {'$ ' + price}
       </p>
       <StarRating rating={rating} />
-      <button className="bg-bg-secondary dark:bg-blue-600  h-8 text-white rounded-sm mt-2 cursor-pointer font-bold">
-        Add to Cart
+      <button className="bg-bg-secondary dark:bg-blue-600  h-8 text-white rounded-sm mt-4 cursor-pointer font-bold">
+        Go to Product
       </button>
     </Link>
   );

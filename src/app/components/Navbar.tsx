@@ -6,21 +6,24 @@ import { setDark, setLight } from '@/app/store/slices/themeSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { logout } from '@/app/store/slices/loginSlice';
-import { usePathname } from 'next/navigation';
+import CartLink from '@/app/components/CartLink';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
   const isDark = useSelector((state: RootState) => state.theme.isDark);
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
   const dispatch = useDispatch();
-  const pathname = usePathname();
+  const [hydrated, setHydrated] = useState(false);
 
-  const toggleTheme: () => void = () => {
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  const toggleTheme = () => {
     if (isDark) {
       dispatch(setLight());
-      localStorage.setItem('theme', 'light');
     } else {
       dispatch(setDark());
-      localStorage.setItem('theme', 'dark');
     }
   };
 
@@ -32,27 +35,23 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center p-4 h-24 bg-white dark:bg-black">
-      <Link href="/" className="pl-4 text-red">
-        <Image
-          src={
-            isDark
-              ? '/images/mobiversite-logo-dark.png'
-              : '/images/mobiversite-logo.png'
-          }
-          alt="Mobiversite Logo"
-          width={96}
-          height={96}
-        />
-      </Link>
-      <div className="flex items-center gap-8">
-        {isLoggedIn && pathname !== '/checkout' && (
-          <Link
-            href="/checkout"
-            className="text-text-primary dark:text-dark-text-primary hover:border-b-2 border-text-primary dark:border-white"
-          >
-            Checkout
-          </Link>
+      <Link href="/" className="text-red">
+        {hydrated && (
+          <Image
+            src={
+              isDark
+                ? '/images/mobiversite-logo-dark.png'
+                : '/images/mobiversite-logo.png'
+            }
+            alt="Mobiversite Logo"
+            width={140} // try width larger than height, adjust as needed
+            height={40} // make height smaller to fit navbar
+            priority
+          />
         )}
+      </Link>
+      <div className="flex items-center gap-4 md:gap-8">
+        <CartLink />
         {isLoggedIn ? (
           <Link
             onClick={handleLogout}
@@ -70,14 +69,16 @@ const Navbar = () => {
           </Link>
         )}
 
-        <button onClick={toggleTheme} className="cursor-pointer">
-          <Image
-            alt="dark mode"
-            width={24}
-            height={24}
-            src={`/images/${isDark ? 'light' : 'dark'}-theme.svg`}
-          />
-        </button>
+        {hydrated && (
+          <button onClick={toggleTheme} className="cursor-pointer">
+            <Image
+              alt="dark mode"
+              width={24}
+              height={24}
+              src={`/images/${isDark ? 'light' : 'dark'}-theme.svg`}
+            />
+          </button>
+        )}
       </div>
     </nav>
   );

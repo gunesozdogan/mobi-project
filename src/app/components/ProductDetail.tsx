@@ -8,7 +8,7 @@ const ProductDetail = ({ product }: { product: Product }) => {
   const { images, title, description, reviews } = product;
 
   return product.title ? (
-    <div className="flex items-start justify-start w-full pt-16  gap-24 h-full pb-32">
+    <div className="flex flex-col md:flex-row items-center md:items-start justify-start w-full pt-16  gap-24 h-full pb-32">
       <div className="flex-2">
         <Image
           src={images[0]}
@@ -18,7 +18,7 @@ const ProductDetail = ({ product }: { product: Product }) => {
           className="w-[40vw] bg-[#e7e7e7] dark:bg-dark-bg-primary"
         />
       </div>
-      <div className="flex flex-col flex-3 gap-4">
+      <div className="flex flex-col flex-3 gap-4 p-4 md:p-0">
         <h2 className="text-4xl font-bold text-text-primary dark:text-dark-text-primary">
           {title}
         </h2>

@@ -10,7 +10,7 @@ export default async function Home() {
   const categories = await getCategories();
 
   return (
-    <div className="flex font-sans bg-background p-4 bg-bg-primary dark:bg-dark-bg-primary gap-32">
+    <div className="flex flex-col md:flex-row font-sans bg-background md:p-4 bg-bg-primary dark:bg-dark-bg-primary md:gap-32">
       <Categories categoryList={categories} />
       <ProductList />
     </div>

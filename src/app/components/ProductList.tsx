@@ -31,7 +31,7 @@ const ProductList = () => {
 
   return selectedProducts ? (
     <div className="flex-1 h-full">
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-4 md:p-0">
         {selectedProducts.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
