@@ -4,10 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { setDark, setLight } from '@/app/store/slices/themeSlice';
 import Image from 'next/image';
+import Link from 'next/link';
+import { logout } from '@/app/store/slices/loginSlice';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const isDark = useSelector((state: RootState) => state.theme.isDark);
+  const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
   const dispatch = useDispatch();
+  const pathname = usePathname();
+
   const toggleTheme: () => void = () => {
     if (isDark) {
       dispatch(setLight());
@@ -18,9 +24,15 @@ const Navbar = () => {
     }
   };
 
+  const handleLogout = () => {
+    document.cookie = 'auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+
+    dispatch(logout());
+  };
+
   return (
     <nav className="flex justify-between items-center p-4 h-24 bg-white dark:bg-black">
-      <div className="pl-4 text-red">
+      <Link href="/" className="pl-4 text-red">
         <Image
           src={
             isDark
@@ -31,8 +43,33 @@ const Navbar = () => {
           width={96}
           height={96}
         />
-      </div>
-      <div>
+      </Link>
+      <div className="flex items-center gap-8">
+        {isLoggedIn && pathname !== '/checkout' && (
+          <Link
+            href="/checkout"
+            className="text-text-primary dark:text-dark-text-primary hover:border-b-2 border-text-primary dark:border-white"
+          >
+            Checkout
+          </Link>
+        )}
+        {isLoggedIn ? (
+          <Link
+            onClick={handleLogout}
+            href="/"
+            className="text-text-primary dark:text-dark-text-primary hover:border-b-2 border-text-primary dark:border-white"
+          >
+            Logout
+          </Link>
+        ) : (
+          <Link
+            href="/login"
+            className="text-text-primary dark:text-dark-text-primary hover:border-b-2 border-text-primary dark:border-white"
+          >
+            Login
+          </Link>
+        )}
+
         <button onClick={toggleTheme} className="cursor-pointer">
           <Image
             alt="dark mode"

@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import { Product } from '@/app/types/product';
 import StarRating from '@/app/components/StarRating';
+import Link from 'next/link';
 
 const ProductItem = ({ product }: { product: Product }) => {
-  const { thumbnail, title, description, price, rating } = product;
+  const { thumbnail, title, description, price, rating, id } = product;
 
   return (
-    <div
+    <Link
+      href={`/products/${id}`}
       className="flex flex-col bg-bg-primary dark:bg-dark-bg-secondary rounded-lg
-    cursor-pointer border border-gray-200 p-4 shadow-md shadow-gray-300 dark:shadow-md dark:shadow-black/50"
+    cursor-pointer p-4 shadow-md shadow-gray-300 dark:shadow-md dark:shadow-black/50"
     >
       <Image
         src={thumbnail}
@@ -34,10 +36,10 @@ const ProductItem = ({ product }: { product: Product }) => {
         {'$ ' + price}
       </p>
       <StarRating rating={rating} />
-      <button className="bg-bg-secondary h-8 text-white rounded-sm mt-2 cursor-pointer font-bold">
+      <button className="bg-bg-secondary dark:bg-blue-600  h-8 text-white rounded-sm mt-2 cursor-pointer font-bold">
         Add to Cart
       </button>
-    </div>
+    </Link>
   );
 };
 

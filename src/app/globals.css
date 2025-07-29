@@ -3,7 +3,6 @@
 @tailwind utilities;
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 @theme {
     --color-text-primary: #222;
     --color-dark-text-primary: #FFF;

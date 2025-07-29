@@ -1,20 +1,25 @@
 'use client';
 
-import { Provider, useSelector } from 'react-redux';
-import { RootState, store } from '@/app/store/store';
-import { useEffect } from 'react';
+import { Provider, useDispatch } from 'react-redux';
+import { store } from '@/app/store/store';
+import { useEffect, useState } from 'react';
+import { login } from '@/app/store/slices/loginSlice';
+import Loading from '@/app/Loading';
+import ThemeListener from '@/app/theme/ThemeListener';
 
-function ThemeListener() {
-  const isDark = useSelector((state: RootState) => state.theme.isDark);
+function AuthListener() {
+  const dispatch = useDispatch();
+  const [hydrated, setLocalHydrated] = useState(false);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDark) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+    const hasAuthCookie = document.cookie.includes('auth=true');
+    if (hasAuthCookie) {
+      dispatch(login());
     }
-  }, [isDark]);
+    setLocalHydrated(true);
+  }, [dispatch]);
+
+  if (!hydrated) return <Loading />;
 
   return null;
 }
@@ -23,6 +28,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
       <ThemeListener />
+      <AuthListener />
       {children}
     </Provider>
   );
