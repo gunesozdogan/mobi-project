@@ -52,14 +52,14 @@ const Categories = ({ categoryList }: { categoryList: string[] }) => {
         </button>
       </div>
       <div className="mt-4 flex overflow-x-auto whitespace-nowrap gap-4 md:flex-col md:whitespace-normal md:overflow-x-visible">
-        <span className="hidden md:block text-text-primary dark:text-dark-text-primary font-bold border-b-2 border-black dark:border-white pb-2 mb-4">
+        <span className="md:w-[50%] hidden md:block text-text-primary dark:text-dark-text-primary font-bold border-b-2 border-black dark:border-white pb-2 mb-4">
           Category Lists
         </span>
         {categoryList.map((category) => (
           <button
             onClick={() => selectCategoryHandler(category)}
             key={category}
-            className={`shrink-0 cursor-pointer text-text-primary dark:text-dark-text-primary text-sm text-left ${
+            className={`md:w-[50%] shrink-0 cursor-pointer text-text-primary dark:text-dark-text-primary text-sm text-left ${
               category === selectedCategory
                 ? 'border-b-2 border-black dark:border-white'
                 : ''
