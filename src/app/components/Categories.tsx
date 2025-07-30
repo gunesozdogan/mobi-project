@@ -59,9 +59,9 @@ const Categories = ({ categoryList }: { categoryList: string[] }) => {
           <button
             onClick={() => selectCategoryHandler(category)}
             key={category}
-            className={`md:w-[50%] shrink-0 cursor-pointer text-text-primary dark:text-dark-text-primary text-sm text-left ${
+            className={`md:w-[50%] shrink-0 cursor-pointer text-white dark:text-dark-text-primary text-sm text-left ${
               category === selectedCategory
-                ? 'border-b-2 border-black dark:border-white'
+                ? 'border-b-2 border-white dark:border-white'
                 : ''
             }`}
           >
